@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/videos_with_channel/videos_with_channel_bloc.dart';
 import 'package:streaming_amazing_flutter/mock/mock_channel_subscription.dart';
-import 'package:streaming_amazing_flutter/mock/mock_video_with_channel.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_channel_subscription.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_videos.dart';
 

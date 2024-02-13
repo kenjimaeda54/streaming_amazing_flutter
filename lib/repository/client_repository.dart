@@ -11,4 +11,8 @@ class ClientRepository {
   Future fetchVideos() async {
     return await _clientApi.fetchVideos();
   }
+
+  Future fetchSubscription(String accessToken) async {
+    return await _clientApi.fetchSubscription(accessToken);
+  }
 }

@@ -1,4 +1,4 @@
-import 'package:streaming_amazing_flutter/models/subscription.dart';
+import 'package:streaming_amazing_flutter/models/subscription/subscription.dart';
 import 'package:streaming_amazing_flutter/models/thumbnails_details.dart';
 
 final mockChannelSubscription = [

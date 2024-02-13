@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:streaming_amazing_flutter/models/channel.dart';
-import 'package:streaming_amazing_flutter/models/videos.dart';
+import 'package:streaming_amazing_flutter/models/channel/channel.dart';
+import 'package:streaming_amazing_flutter/models/videos/videos.dart';
 import 'package:streaming_amazing_flutter/models/videos_with_channel.dart';
 import 'package:streaming_amazing_flutter/repository/client_repository.dart';
 
@@ -22,8 +22,8 @@ class VideosWithChannelBloc
       Emitter<VideosWithChannelState> emit) async {
     emit(VideosWithChannelInitial());
     final List<VideosWithChannel> videosWithChannel = [];
+    emit(VideosWithChannelStateLoading());
     await _clientRepo.fetchVideos().onError((error, stackTrace) {
-      print("$error, where => bloc");
       emit(VideosWithChannelError(errorMessage: error.toString()));
     }).then((videos) async {
       if (videos != null) {

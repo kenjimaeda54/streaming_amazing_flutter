@@ -1,7 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:streaming_amazing_flutter/client/base_service.dart';
 import 'package:streaming_amazing_flutter/client/dio.dart';
-import 'package:streaming_amazing_flutter/models/channel.dart';
-import 'package:streaming_amazing_flutter/models/videos.dart';
+import 'package:streaming_amazing_flutter/models/channel/channel.dart';
+import 'package:streaming_amazing_flutter/models/subscription/subscription.dart';
+import 'package:streaming_amazing_flutter/models/videos/videos.dart';
 
 class ClientService extends BaseService {
   @override
@@ -24,7 +26,19 @@ class ClientService extends BaseService {
 
       return Video.fromJson(response.data);
     } catch (e) {
-      print("$e,where => client_service");
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Subscription> fetchSubscription(String accessToken) async {
+    try {
+      final response = await api.get(
+          "/subscriptions?part=snippet&maxResults=10&mine=true&key=key=AIzaSyCU7HV_2LRv3Z3Uf0Prvb2C7i_ob8j9cQU",
+          options: Options(headers: {"Authorization": "Bearer $accessToken"}));
+
+      return Subscription.fromJson(response.data);
+    } catch (e) {
       rethrow;
     }
   }
