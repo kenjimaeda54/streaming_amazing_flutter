@@ -34,15 +34,17 @@ class RowVideos extends StatelessWidget {
             const SizedBox(
               width: 15,
             ),
-            Text(
-              video.titleVideo,
-              style: TextStyle(
-                fontFamily: 'Lato',
-                fontSize: 17,
-                color: Theme.of(context).primaryColorDark,
+            Expanded(
+              child: Text(
+                video.titleVideo,
+                style: TextStyle(
+                  fontFamily: 'Lato',
+                  fontSize: 17,
+                  color: Theme.of(context).primaryColorDark,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
             )
           ],
         )

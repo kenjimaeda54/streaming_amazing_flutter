@@ -1,12 +1,14 @@
 import 'package:streaming_amazing_flutter/models/thumbnails_details.dart';
 
 class Video {
-  final ItemsVideo items;
+  final List<ItemsVideo> items;
 
   Video({required this.items});
 
   factory Video.fromJson(Map<String, dynamic> json) {
-    return Video(items: json['items']);
+    final itemsDynamic = json['items'] as List<dynamic>;
+    final items = itemsDynamic.map((it) => ItemsVideo.fromJson(it)).toList();
+    return Video(items: items);
   }
 }
 
@@ -17,7 +19,9 @@ class ItemsVideo {
   ItemsVideo({required this.snippet, required this.id});
 
   factory ItemsVideo.fromJson(Map<String, dynamic> json) {
-    return ItemsVideo(snippet: json['snippet'], id: json['id']);
+    final id = IdVideo.fromJson(json["id"]);
+
+    return ItemsVideo(snippet: SnippetVideo.fromJson(json['snippet']), id: id);
   }
 }
 
@@ -42,7 +46,7 @@ class SnippetVideo {
         channelId: json['channelId'],
         title: json['title'],
         description: json['description'],
-        thumbnails: json['thumbnails'],
+        thumbnails: ThumbNailsVideo.fromJson(json['thumbnails']),
         channelTitle: json['channelTitle'],
         publishedAt: json['publishedAt']);
   }
@@ -60,9 +64,9 @@ class ThumbNailsVideo {
 
   factory ThumbNailsVideo.fromJson(Map<String, dynamic> json) {
     return ThumbNailsVideo(
-        defaultThumbNails: json['default'],
-        medium: json['medium'],
-        high: json['high']);
+        defaultThumbNails: ThumbNailsDetails.fromJson(json['default']),
+        medium: ThumbNailsDetails.fromJson(json['medium']),
+        high: ThumbNailsDetails.fromJson(json['high']));
   }
 }
 

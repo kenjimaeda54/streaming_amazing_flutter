@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:streaming_amazing_flutter/screens/home/home.dart';
+import 'package:streaming_amazing_flutter/routes/app_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         primaryColorDark: const Color(0xFF09090A),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: const AppRoutes(),
     );
   }
 }
