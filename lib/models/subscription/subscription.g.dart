@@ -54,10 +54,9 @@ Map<String, dynamic> _$$SnippetSubscriptionImplToJson(
 _$ThumbnailSubscriptionImpl _$$ThumbnailSubscriptionImplFromJson(
         Map<String, dynamic> json) =>
     _$ThumbnailSubscriptionImpl(
-      medium: ThumbnailsDetailsVideo.fromJson(
-          json['medium'] as Map<String, dynamic>),
-      high:
-          ThumbnailsDetailsVideo.fromJson(json['high'] as Map<String, dynamic>),
+      medium:
+          ThumbnailsDetails.fromJson(json['medium'] as Map<String, dynamic>),
+      high: ThumbnailsDetails.fromJson(json['high'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ThumbnailSubscriptionImplToJson(

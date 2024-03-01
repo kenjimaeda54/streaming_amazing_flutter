@@ -84,10 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: RowChannelSubscription(
                           title: mockChannelSubscription[index]
                               .items
+                              .first
                               .snippet
                               .title,
                           uri: mockChannelSubscription[index]
                               .items
+                              .first
                               .snippet
                               .thumbnails
                               .medium

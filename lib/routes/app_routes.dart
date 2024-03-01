@@ -7,6 +7,10 @@ class AppRoutes extends StatefulWidget {
 
   @override
   State<AppRoutes> createState() => _AppRoutesState();
+
+  static Route<void> route() {
+    return MaterialPageRoute<void>(builder: (_) => const AppRoutes());
+  }
 }
 
 class _AppRoutesState extends State<AppRoutes> {

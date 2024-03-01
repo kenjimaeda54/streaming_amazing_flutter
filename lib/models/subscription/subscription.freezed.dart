@@ -567,8 +567,8 @@ ThumbnailSubscription _$ThumbnailSubscriptionFromJson(
 
 /// @nodoc
 mixin _$ThumbnailSubscription {
-  ThumbnailsDetailsVideo get medium => throw _privateConstructorUsedError;
-  ThumbnailsDetailsVideo get high => throw _privateConstructorUsedError;
+  ThumbnailsDetails get medium => throw _privateConstructorUsedError;
+  ThumbnailsDetails get high => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -582,10 +582,10 @@ abstract class $ThumbnailSubscriptionCopyWith<$Res> {
           $Res Function(ThumbnailSubscription) then) =
       _$ThumbnailSubscriptionCopyWithImpl<$Res, ThumbnailSubscription>;
   @useResult
-  $Res call({ThumbnailsDetailsVideo medium, ThumbnailsDetailsVideo high});
+  $Res call({ThumbnailsDetails medium, ThumbnailsDetails high});
 
-  $ThumbnailsDetailsVideoCopyWith<$Res> get medium;
-  $ThumbnailsDetailsVideoCopyWith<$Res> get high;
+  $ThumbnailsDetailsCopyWith<$Res> get medium;
+  $ThumbnailsDetailsCopyWith<$Res> get high;
 }
 
 /// @nodoc
@@ -609,26 +609,26 @@ class _$ThumbnailSubscriptionCopyWithImpl<$Res,
       medium: null == medium
           ? _value.medium
           : medium // ignore: cast_nullable_to_non_nullable
-              as ThumbnailsDetailsVideo,
+              as ThumbnailsDetails,
       high: null == high
           ? _value.high
           : high // ignore: cast_nullable_to_non_nullable
-              as ThumbnailsDetailsVideo,
+              as ThumbnailsDetails,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ThumbnailsDetailsVideoCopyWith<$Res> get medium {
-    return $ThumbnailsDetailsVideoCopyWith<$Res>(_value.medium, (value) {
+  $ThumbnailsDetailsCopyWith<$Res> get medium {
+    return $ThumbnailsDetailsCopyWith<$Res>(_value.medium, (value) {
       return _then(_value.copyWith(medium: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ThumbnailsDetailsVideoCopyWith<$Res> get high {
-    return $ThumbnailsDetailsVideoCopyWith<$Res>(_value.high, (value) {
+  $ThumbnailsDetailsCopyWith<$Res> get high {
+    return $ThumbnailsDetailsCopyWith<$Res>(_value.high, (value) {
       return _then(_value.copyWith(high: value) as $Val);
     });
   }
@@ -643,12 +643,12 @@ abstract class _$$ThumbnailSubscriptionImplCopyWith<$Res>
       __$$ThumbnailSubscriptionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ThumbnailsDetailsVideo medium, ThumbnailsDetailsVideo high});
+  $Res call({ThumbnailsDetails medium, ThumbnailsDetails high});
 
   @override
-  $ThumbnailsDetailsVideoCopyWith<$Res> get medium;
+  $ThumbnailsDetailsCopyWith<$Res> get medium;
   @override
-  $ThumbnailsDetailsVideoCopyWith<$Res> get high;
+  $ThumbnailsDetailsCopyWith<$Res> get high;
 }
 
 /// @nodoc
@@ -670,11 +670,11 @@ class __$$ThumbnailSubscriptionImplCopyWithImpl<$Res>
       medium: null == medium
           ? _value.medium
           : medium // ignore: cast_nullable_to_non_nullable
-              as ThumbnailsDetailsVideo,
+              as ThumbnailsDetails,
       high: null == high
           ? _value.high
           : high // ignore: cast_nullable_to_non_nullable
-              as ThumbnailsDetailsVideo,
+              as ThumbnailsDetails,
     ));
   }
 }
@@ -690,9 +690,9 @@ class _$ThumbnailSubscriptionImpl
       _$$ThumbnailSubscriptionImplFromJson(json);
 
   @override
-  final ThumbnailsDetailsVideo medium;
+  final ThumbnailsDetails medium;
   @override
-  final ThumbnailsDetailsVideo high;
+  final ThumbnailsDetails high;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -738,17 +738,16 @@ class _$ThumbnailSubscriptionImpl
 
 abstract class _ThumbnailSubscription implements ThumbnailSubscription {
   const factory _ThumbnailSubscription(
-          {required final ThumbnailsDetailsVideo medium,
-          required final ThumbnailsDetailsVideo high}) =
-      _$ThumbnailSubscriptionImpl;
+      {required final ThumbnailsDetails medium,
+      required final ThumbnailsDetails high}) = _$ThumbnailSubscriptionImpl;
 
   factory _ThumbnailSubscription.fromJson(Map<String, dynamic> json) =
       _$ThumbnailSubscriptionImpl.fromJson;
 
   @override
-  ThumbnailsDetailsVideo get medium;
+  ThumbnailsDetails get medium;
   @override
-  ThumbnailsDetailsVideo get high;
+  ThumbnailsDetails get high;
   @override
   @JsonKey(ignore: true)
   _$$ThumbnailSubscriptionImplCopyWith<_$ThumbnailSubscriptionImpl>

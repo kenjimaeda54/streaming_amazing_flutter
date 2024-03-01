@@ -8,8 +8,8 @@ part 'thumbnails.g.dart';
 @freezed
 class ThumbnailsVideo with _$ThumbnailsVideo {
   const factory ThumbnailsVideo(
-      {required ThumbnailsDetailsVideo medium,
-      required ThumbnailsDetailsVideo high}) = _ThumbnailsVideo;
+      {required ThumbnailsDetails medium,
+      required ThumbnailsDetails high}) = _ThumbnailsVideo;
 
   factory ThumbnailsVideo.fromJson(Map<String, Object?> json) =>
       _$ThumbnailsVideoFromJson(json);

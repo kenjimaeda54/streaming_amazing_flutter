@@ -6,14 +6,14 @@ part of 'thumbnails_details.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ThumbnailsDetailsVideoImpl _$$ThumbnailsDetailsVideoImplFromJson(
+_$ThumbnailsDetailsImpl _$$ThumbnailsDetailsImplFromJson(
         Map<String, dynamic> json) =>
-    _$ThumbnailsDetailsVideoImpl(
+    _$ThumbnailsDetailsImpl(
       url: json['url'] as String,
     );
 
-Map<String, dynamic> _$$ThumbnailsDetailsVideoImplToJson(
-        _$ThumbnailsDetailsVideoImpl instance) =>
+Map<String, dynamic> _$$ThumbnailsDetailsImplToJson(
+        _$ThumbnailsDetailsImpl instance) =>
     <String, dynamic>{
       'url': instance.url,
     };

@@ -14,35 +14,33 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-ThumbnailsDetailsVideo _$ThumbnailsDetailsVideoFromJson(
-    Map<String, dynamic> json) {
-  return _ThumbnailsDetailsVideo.fromJson(json);
+ThumbnailsDetails _$ThumbnailsDetailsFromJson(Map<String, dynamic> json) {
+  return _ThumbnailsDetails.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ThumbnailsDetailsVideo {
+mixin _$ThumbnailsDetails {
   String get url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ThumbnailsDetailsVideoCopyWith<ThumbnailsDetailsVideo> get copyWith =>
+  $ThumbnailsDetailsCopyWith<ThumbnailsDetails> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ThumbnailsDetailsVideoCopyWith<$Res> {
-  factory $ThumbnailsDetailsVideoCopyWith(ThumbnailsDetailsVideo value,
-          $Res Function(ThumbnailsDetailsVideo) then) =
-      _$ThumbnailsDetailsVideoCopyWithImpl<$Res, ThumbnailsDetailsVideo>;
+abstract class $ThumbnailsDetailsCopyWith<$Res> {
+  factory $ThumbnailsDetailsCopyWith(
+          ThumbnailsDetails value, $Res Function(ThumbnailsDetails) then) =
+      _$ThumbnailsDetailsCopyWithImpl<$Res, ThumbnailsDetails>;
   @useResult
   $Res call({String url});
 }
 
 /// @nodoc
-class _$ThumbnailsDetailsVideoCopyWithImpl<$Res,
-        $Val extends ThumbnailsDetailsVideo>
-    implements $ThumbnailsDetailsVideoCopyWith<$Res> {
-  _$ThumbnailsDetailsVideoCopyWithImpl(this._value, this._then);
+class _$ThumbnailsDetailsCopyWithImpl<$Res, $Val extends ThumbnailsDetails>
+    implements $ThumbnailsDetailsCopyWith<$Res> {
+  _$ThumbnailsDetailsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -64,25 +62,22 @@ class _$ThumbnailsDetailsVideoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$ThumbnailsDetailsVideoImplCopyWith<$Res>
-    implements $ThumbnailsDetailsVideoCopyWith<$Res> {
-  factory _$$ThumbnailsDetailsVideoImplCopyWith(
-          _$ThumbnailsDetailsVideoImpl value,
-          $Res Function(_$ThumbnailsDetailsVideoImpl) then) =
-      __$$ThumbnailsDetailsVideoImplCopyWithImpl<$Res>;
+abstract class _$$ThumbnailsDetailsImplCopyWith<$Res>
+    implements $ThumbnailsDetailsCopyWith<$Res> {
+  factory _$$ThumbnailsDetailsImplCopyWith(_$ThumbnailsDetailsImpl value,
+          $Res Function(_$ThumbnailsDetailsImpl) then) =
+      __$$ThumbnailsDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String url});
 }
 
 /// @nodoc
-class __$$ThumbnailsDetailsVideoImplCopyWithImpl<$Res>
-    extends _$ThumbnailsDetailsVideoCopyWithImpl<$Res,
-        _$ThumbnailsDetailsVideoImpl>
-    implements _$$ThumbnailsDetailsVideoImplCopyWith<$Res> {
-  __$$ThumbnailsDetailsVideoImplCopyWithImpl(
-      _$ThumbnailsDetailsVideoImpl _value,
-      $Res Function(_$ThumbnailsDetailsVideoImpl) _then)
+class __$$ThumbnailsDetailsImplCopyWithImpl<$Res>
+    extends _$ThumbnailsDetailsCopyWithImpl<$Res, _$ThumbnailsDetailsImpl>
+    implements _$$ThumbnailsDetailsImplCopyWith<$Res> {
+  __$$ThumbnailsDetailsImplCopyWithImpl(_$ThumbnailsDetailsImpl _value,
+      $Res Function(_$ThumbnailsDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -90,7 +85,7 @@ class __$$ThumbnailsDetailsVideoImplCopyWithImpl<$Res>
   $Res call({
     Object? url = null,
   }) {
-    return _then(_$ThumbnailsDetailsVideoImpl(
+    return _then(_$ThumbnailsDetailsImpl(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -101,27 +96,27 @@ class __$$ThumbnailsDetailsVideoImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ThumbnailsDetailsVideoImpl
+class _$ThumbnailsDetailsImpl
     with DiagnosticableTreeMixin
-    implements _ThumbnailsDetailsVideo {
-  const _$ThumbnailsDetailsVideoImpl({required this.url});
+    implements _ThumbnailsDetails {
+  const _$ThumbnailsDetailsImpl({required this.url});
 
-  factory _$ThumbnailsDetailsVideoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ThumbnailsDetailsVideoImplFromJson(json);
+  factory _$ThumbnailsDetailsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ThumbnailsDetailsImplFromJson(json);
 
   @override
   final String url;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ThumbnailsDetailsVideo(url: $url)';
+    return 'ThumbnailsDetails(url: $url)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'ThumbnailsDetailsVideo'))
+      ..add(DiagnosticsProperty('type', 'ThumbnailsDetails'))
       ..add(DiagnosticsProperty('url', url));
   }
 
@@ -129,7 +124,7 @@ class _$ThumbnailsDetailsVideoImpl
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ThumbnailsDetailsVideoImpl &&
+            other is _$ThumbnailsDetailsImpl &&
             (identical(other.url, url) || other.url == url));
   }
 
@@ -140,29 +135,29 @@ class _$ThumbnailsDetailsVideoImpl
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ThumbnailsDetailsVideoImplCopyWith<_$ThumbnailsDetailsVideoImpl>
-      get copyWith => __$$ThumbnailsDetailsVideoImplCopyWithImpl<
-          _$ThumbnailsDetailsVideoImpl>(this, _$identity);
+  _$$ThumbnailsDetailsImplCopyWith<_$ThumbnailsDetailsImpl> get copyWith =>
+      __$$ThumbnailsDetailsImplCopyWithImpl<_$ThumbnailsDetailsImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ThumbnailsDetailsVideoImplToJson(
+    return _$$ThumbnailsDetailsImplToJson(
       this,
     );
   }
 }
 
-abstract class _ThumbnailsDetailsVideo implements ThumbnailsDetailsVideo {
-  const factory _ThumbnailsDetailsVideo({required final String url}) =
-      _$ThumbnailsDetailsVideoImpl;
+abstract class _ThumbnailsDetails implements ThumbnailsDetails {
+  const factory _ThumbnailsDetails({required final String url}) =
+      _$ThumbnailsDetailsImpl;
 
-  factory _ThumbnailsDetailsVideo.fromJson(Map<String, dynamic> json) =
-      _$ThumbnailsDetailsVideoImpl.fromJson;
+  factory _ThumbnailsDetails.fromJson(Map<String, dynamic> json) =
+      _$ThumbnailsDetailsImpl.fromJson;
 
   @override
   String get url;
   @override
   @JsonKey(ignore: true)
-  _$$ThumbnailsDetailsVideoImplCopyWith<_$ThumbnailsDetailsVideoImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$ThumbnailsDetailsImplCopyWith<_$ThumbnailsDetailsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

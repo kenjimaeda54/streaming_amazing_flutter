@@ -9,10 +9,9 @@ part of 'thumbnails.dart';
 _$ThumbnailsVideoImpl _$$ThumbnailsVideoImplFromJson(
         Map<String, dynamic> json) =>
     _$ThumbnailsVideoImpl(
-      medium: ThumbnailsDetailsVideo.fromJson(
-          json['medium'] as Map<String, dynamic>),
-      high:
-          ThumbnailsDetailsVideo.fromJson(json['high'] as Map<String, dynamic>),
+      medium:
+          ThumbnailsDetails.fromJson(json['medium'] as Map<String, dynamic>),
+      high: ThumbnailsDetails.fromJson(json['high'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ThumbnailsVideoImplToJson(

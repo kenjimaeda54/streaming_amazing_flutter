@@ -13,7 +13,6 @@ class ClientService extends BaseService {
           "/channels?part=statistics&part=snippet&id=$channelId&key=AIzaSyCU7HV_2LRv3Z3Uf0Prvb2C7i_ob8j9cQU");
       return Channel.fromJson(response.data);
     } catch (e) {
-      print(e);
       rethrow;
     }
   }

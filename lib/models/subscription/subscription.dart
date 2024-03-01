@@ -41,8 +41,8 @@ class SnippetSubscription with _$SnippetSubscription {
 @freezed
 class ThumbnailSubscription with _$ThumbnailSubscription {
   const factory ThumbnailSubscription(
-      {required ThumbnailsDetailsVideo medium,
-      required ThumbnailsDetailsVideo high}) = _ThumbnailSubscription;
+      {required ThumbnailsDetails medium,
+      required ThumbnailsDetails high}) = _ThumbnailSubscription;
 
   factory ThumbnailSubscription.fromJson(Map<String, Object?> json) =>
       _$ThumbnailSubscriptionFromJson(json);

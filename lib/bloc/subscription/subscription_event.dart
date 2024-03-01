@@ -1,7 +1,7 @@
 part of 'subscription_bloc.dart';
 
 @immutable
-abstract class SubscriptionEvent {}
+sealed class SubscriptionEvent {}
 
 class SubscriptionFetchDataEvent extends SubscriptionEvent {
   final String accessToken;

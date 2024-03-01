@@ -20,8 +20,8 @@ ThumbnailsVideo _$ThumbnailsVideoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ThumbnailsVideo {
-  ThumbnailsDetailsVideo get medium => throw _privateConstructorUsedError;
-  ThumbnailsDetailsVideo get high => throw _privateConstructorUsedError;
+  ThumbnailsDetails get medium => throw _privateConstructorUsedError;
+  ThumbnailsDetails get high => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,10 +35,10 @@ abstract class $ThumbnailsVideoCopyWith<$Res> {
           ThumbnailsVideo value, $Res Function(ThumbnailsVideo) then) =
       _$ThumbnailsVideoCopyWithImpl<$Res, ThumbnailsVideo>;
   @useResult
-  $Res call({ThumbnailsDetailsVideo medium, ThumbnailsDetailsVideo high});
+  $Res call({ThumbnailsDetails medium, ThumbnailsDetails high});
 
-  $ThumbnailsDetailsVideoCopyWith<$Res> get medium;
-  $ThumbnailsDetailsVideoCopyWith<$Res> get high;
+  $ThumbnailsDetailsCopyWith<$Res> get medium;
+  $ThumbnailsDetailsCopyWith<$Res> get high;
 }
 
 /// @nodoc
@@ -61,26 +61,26 @@ class _$ThumbnailsVideoCopyWithImpl<$Res, $Val extends ThumbnailsVideo>
       medium: null == medium
           ? _value.medium
           : medium // ignore: cast_nullable_to_non_nullable
-              as ThumbnailsDetailsVideo,
+              as ThumbnailsDetails,
       high: null == high
           ? _value.high
           : high // ignore: cast_nullable_to_non_nullable
-              as ThumbnailsDetailsVideo,
+              as ThumbnailsDetails,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ThumbnailsDetailsVideoCopyWith<$Res> get medium {
-    return $ThumbnailsDetailsVideoCopyWith<$Res>(_value.medium, (value) {
+  $ThumbnailsDetailsCopyWith<$Res> get medium {
+    return $ThumbnailsDetailsCopyWith<$Res>(_value.medium, (value) {
       return _then(_value.copyWith(medium: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ThumbnailsDetailsVideoCopyWith<$Res> get high {
-    return $ThumbnailsDetailsVideoCopyWith<$Res>(_value.high, (value) {
+  $ThumbnailsDetailsCopyWith<$Res> get high {
+    return $ThumbnailsDetailsCopyWith<$Res>(_value.high, (value) {
       return _then(_value.copyWith(high: value) as $Val);
     });
   }
@@ -94,12 +94,12 @@ abstract class _$$ThumbnailsVideoImplCopyWith<$Res>
       __$$ThumbnailsVideoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ThumbnailsDetailsVideo medium, ThumbnailsDetailsVideo high});
+  $Res call({ThumbnailsDetails medium, ThumbnailsDetails high});
 
   @override
-  $ThumbnailsDetailsVideoCopyWith<$Res> get medium;
+  $ThumbnailsDetailsCopyWith<$Res> get medium;
   @override
-  $ThumbnailsDetailsVideoCopyWith<$Res> get high;
+  $ThumbnailsDetailsCopyWith<$Res> get high;
 }
 
 /// @nodoc
@@ -120,11 +120,11 @@ class __$$ThumbnailsVideoImplCopyWithImpl<$Res>
       medium: null == medium
           ? _value.medium
           : medium // ignore: cast_nullable_to_non_nullable
-              as ThumbnailsDetailsVideo,
+              as ThumbnailsDetails,
       high: null == high
           ? _value.high
           : high // ignore: cast_nullable_to_non_nullable
-              as ThumbnailsDetailsVideo,
+              as ThumbnailsDetails,
     ));
   }
 }
@@ -140,9 +140,9 @@ class _$ThumbnailsVideoImpl
       _$$ThumbnailsVideoImplFromJson(json);
 
   @override
-  final ThumbnailsDetailsVideo medium;
+  final ThumbnailsDetails medium;
   @override
-  final ThumbnailsDetailsVideo high;
+  final ThumbnailsDetails high;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -188,16 +188,16 @@ class _$ThumbnailsVideoImpl
 
 abstract class _ThumbnailsVideo implements ThumbnailsVideo {
   const factory _ThumbnailsVideo(
-      {required final ThumbnailsDetailsVideo medium,
-      required final ThumbnailsDetailsVideo high}) = _$ThumbnailsVideoImpl;
+      {required final ThumbnailsDetails medium,
+      required final ThumbnailsDetails high}) = _$ThumbnailsVideoImpl;
 
   factory _ThumbnailsVideo.fromJson(Map<String, dynamic> json) =
       _$ThumbnailsVideoImpl.fromJson;
 
   @override
-  ThumbnailsDetailsVideo get medium;
+  ThumbnailsDetails get medium;
   @override
-  ThumbnailsDetailsVideo get high;
+  ThumbnailsDetails get high;
   @override
   @JsonKey(ignore: true)
   _$$ThumbnailsVideoImplCopyWith<_$ThumbnailsVideoImpl> get copyWith =>
