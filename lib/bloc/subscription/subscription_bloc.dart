@@ -20,7 +20,7 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
     emit(SubscriptionInitial());
     emit(SubscriptionLoading());
     await _clientRepo
-        .fetchSubscription("34343")
+        .fetchSubscription(event.accessToken)
         .onError(
             (error, _) => SubscriptionError(errorMessage: error.toString()))
         .then((value) {

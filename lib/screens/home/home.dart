@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:streaming_amazing_flutter/bloc/google_sign_in/google_sign_in_bloc.dart';
+import 'package:streaming_amazing_flutter/bloc/subscription/subscription_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/videos_with_channel/videos_with_channel_bloc.dart';
 import 'package:streaming_amazing_flutter/mock/mock_channel_subscription.dart';
+import 'package:streaming_amazing_flutter/models/user.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_channel_subscription.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_videos.dart';
 
@@ -14,16 +17,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late VideosWithChannelBloc _videosBloc;
+  late SubscriptionBloc _subscriptionBloc;
 
   @override
   void initState() {
     _videosBloc = BlocProvider.of(context);
     _videosBloc.add(VideosFetchDataEvent());
+    _subscriptionBloc = BlocProvider.of(context);
     super.initState();
   }
 
+//quando um widget depended de outro
+//https://stackoverflow.com/questions/64482468/how-to-access-data-in-blocs-state-from-another-bloc/72528313#72528313
+//para chamar o subscriiption passando access token
   @override
   Widget build(BuildContext context) {
+    final user = context.select((GoogleSignInBloc bloc) => bloc.state.user);
+    _subscriptionBloc
+        .add(SubscriptionFetchDataEvent(accessToken: user.idToken));
+
     return Scaffold(
         body: SafeArea(
       bottom: false,

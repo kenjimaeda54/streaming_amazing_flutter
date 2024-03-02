@@ -9,6 +9,8 @@ final List<String> scopes = [
 
 class GoogleSignInService {
   final GoogleSignIn _googleSignIn = GoogleSignIn(
+    clientId:
+        '359153041371-hbq6vvh9p39ojcd2t9a7p741ktip6tms.apps.googleusercontent.com',
     scopes: scopes,
   );
 
@@ -21,6 +23,7 @@ class GoogleSignInService {
       _googleSignIn.signInSilently();
       return userAccount;
     } catch (e) {
+      print(e.toString());
       rethrow;
     }
   }
