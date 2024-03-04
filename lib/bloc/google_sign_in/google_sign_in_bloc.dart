@@ -2,15 +2,25 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:streaming_amazing_flutter/models/user.dart';
-import 'package:streaming_amazing_flutter/repository/client_repository.dart';
 
 part 'google_sign_in_event.dart';
 part 'google_sign_in_state.dart';
 
+final List<String> scopes = [
+  "https://www.googleapis.com/auth/youtube",
+  "https://www.googleapis.com/auth/youtube.readonly",
+  "https://www.googleapis.com/auth/youtubepartner"
+];
+
 class GoogleSignInBloc
     extends Bloc<GoogleSignInEvent, GoogleAuthenticationState> {
-  final ClientRepository _clientRepository = ClientRepository();
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    clientId:
+        '359153041371-hbq6vvh9p39ojcd2t9a7p741ktip6tms.apps.googleusercontent.com',
+    scopes: scopes,
+  );
 
   GoogleSignInBloc() : super(const GoogleAuthenticationState.unknown()) {
     on<GoogleAuthenticationChanged>(_googleAuthenticationChanged);
@@ -18,11 +28,13 @@ class GoogleSignInBloc
   }
 
   _googleGetCurrentUser(
-      GoogleCurrentUser event, Emitter<GoogleAuthenticationState> emit) {
-    final currentUser = _clientRepository.getCurrentUser();
+      GoogleCurrentUser event, Emitter<GoogleAuthenticationState> emit) async {
+    final currentUser = _googleSignIn.currentUser;
+    final googleAuthentication = await currentUser?.authentication;
+
     if (currentUser != null) {
       final user = User(
-          accessToken: currentUser.serverAuthCode ?? "",
+          accessToken: googleAuthentication?.accessToken ?? "",
           userDetails: UserDetails(
               email: currentUser.email,
               givenName: currentUser.displayName,
@@ -40,7 +52,9 @@ class GoogleSignInBloc
         return emit(const GoogleAuthenticationState.unauthenticated());
 
       case AuthenticationStatus.authenticated:
-        final userAccount = await _clientRepository.fetchCurrentUserChanged();
+        final userAccount = await _googleSignIn.signIn();
+        await _googleSignIn.requestScopes(scopes);
+        _googleSignIn.signInSilently();
         final googleAuthentication = await userAccount?.authentication;
         if (userAccount != null) {
           final user = User(
