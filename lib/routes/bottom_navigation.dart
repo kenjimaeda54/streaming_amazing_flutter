@@ -10,7 +10,7 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 100,
+      bottom: 50,
       left: 55,
       right: 55,
       child: Container(

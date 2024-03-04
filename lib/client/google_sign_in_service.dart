@@ -1,5 +1,4 @@
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:streaming_amazing_flutter/models/user.dart';
 
 final List<String> scopes = [
   "https://www.googleapis.com/auth/youtube",
@@ -7,6 +6,7 @@ final List<String> scopes = [
   "https://www.googleapis.com/auth/youtubepartner"
 ];
 
+//https://github.com/flutter/flutter/issues/97376
 class GoogleSignInService {
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     clientId:

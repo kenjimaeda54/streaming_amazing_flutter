@@ -1,10 +1,10 @@
 class User {
-  final String idToken;
+  final String accessToken;
   final UserDetails userDetails;
-  const User({required this.idToken, required this.userDetails});
+  const User({required this.accessToken, required this.userDetails});
 
   static const User empty = User(
-      idToken: "",
+      accessToken: "",
       userDetails: UserDetails(
           email: "",
           givenName: "",

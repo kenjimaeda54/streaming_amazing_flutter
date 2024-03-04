@@ -22,7 +22,7 @@ class GoogleSignInBloc
     final currentUser = _clientRepository.getCurrentUser();
     if (currentUser != null) {
       final user = User(
-          idToken: currentUser.serverAuthCode ?? "",
+          accessToken: currentUser.serverAuthCode ?? "",
           userDetails: UserDetails(
               email: currentUser.email,
               givenName: currentUser.displayName,
@@ -41,9 +41,10 @@ class GoogleSignInBloc
 
       case AuthenticationStatus.authenticated:
         final userAccount = await _clientRepository.fetchCurrentUserChanged();
+        final googleAuthentication = await userAccount?.authentication;
         if (userAccount != null) {
           final user = User(
-              idToken: userAccount.serverAuthCode ?? "",
+              accessToken: googleAuthentication?.accessToken ?? "",
               userDetails: UserDetails(
                   email: userAccount.email,
                   givenName: userAccount.displayName,
@@ -56,46 +57,4 @@ class GoogleSignInBloc
         return emit(const GoogleAuthenticationState.unauthenticated());
     }
   }
-
-  // _handleAuthorizeUser(
-  //     GoogleSignInEvent event, Emitter<GoogleSignInState> emit) {
-  //   if (event is GoogleFetchAuthorizeUser) {
-  //     emit(GoogleSignInInitial());
-  //     emit(GoogleSignLoading());
-  //     final currentUser = _clientRepository.getCurrentUser();
-
-  //     if (currentUser != null) {
-  //       final user = User(
-  //           idToken: currentUser.serverAuthCode ?? "",
-  //           userDetails: UserDetails(
-  //               email: currentUser.email,
-  //               givenName: currentUser.displayName,
-  //               photo: currentUser.photoUrl));
-
-  //       emit(GoogleSignInLoaded(user: user));
-  //     }
-  //   }
-  // }
-
-  // _fetchUserChanged(
-  //     GoogleSignInEvent event, Emitter<GoogleSignInState> emit) async {
-  //   if (event is GoogleSignFetchUser) {
-  //     emit(GoogleSignInInitial());
-  //     emit(GoogleSignLoading());
-
-  //     final userAccount = await _clientRepository.fetchCurrentUserChanged();
-
-  //     if (userAccount != null) {
-  //       final user = User(
-  //           idToken: userAccount.serverAuthCode ?? "",
-  //           userDetails: UserDetails(
-  //               email: userAccount.email,
-  //               givenName: userAccount.displayName,
-  //               photo: userAccount.photoUrl));
-  //       emit(GoogleSignInLoaded(user: user));
-  //       return;
-  //     }
-  //     emit(GoogleSingError());
-  //   }
-  // }
 }

@@ -4,7 +4,6 @@ import 'package:streaming_amazing_flutter/bloc/google_sign_in/google_sign_in_blo
 import 'package:streaming_amazing_flutter/bloc/subscription/subscription_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/videos_with_channel/videos_with_channel_bloc.dart';
 import 'package:streaming_amazing_flutter/mock/mock_channel_subscription.dart';
-import 'package:streaming_amazing_flutter/models/user.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_channel_subscription.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_videos.dart';
 
@@ -34,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final user = context.select((GoogleSignInBloc bloc) => bloc.state.user);
     _subscriptionBloc
-        .add(SubscriptionFetchDataEvent(accessToken: user.idToken));
+        .add(SubscriptionFetchDataEvent(accessToken: user.accessToken));
 
     return Scaffold(
         body: SafeArea(
@@ -85,30 +84,31 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 30,
             ),
             SizedBox(
-              height: 130,
-              child: ListView.builder(
-                  itemCount: mockChannelSubscription.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(
-                          right: 10), //padding precisa estar fora
-                      child: RowChannelSubscription(
-                          title: mockChannelSubscription[index]
-                              .items
-                              .first
-                              .snippet
-                              .title,
-                          uri: mockChannelSubscription[index]
-                              .items
-                              .first
-                              .snippet
-                              .thumbnails
-                              .medium
-                              .url),
-                    );
-                  }),
-            ),
+                height: 130,
+                child: BlocConsumer<SubscriptionBloc, SubscriptionState>(
+                  builder: (context, state) {
+                    if (state is SubscriptionLoading) {
+                      return const Text("Loading");
+                    } else if (state is SubscriptionLoaded) {
+                      return ListView.builder(
+                          itemCount: state.data.items.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 10), //padding precisa estar fora
+                              child: RowChannelSubscription(
+                                  title: state.data.items[index].snippet.title,
+                                  uri: state.data.items[index].snippet
+                                      .thumbnails.medium.url),
+                            );
+                          });
+                    } else {
+                      return Text("error");
+                    }
+                  },
+                  listener: (BuildContext context, SubscriptionState state) {},
+                )),
             Expanded(
               child:
                   BlocConsumer<VideosWithChannelBloc, VideosWithChannelState>(
