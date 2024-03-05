@@ -15,7 +15,11 @@ final class VideosWithChannelLoaded extends VideosWithChannelState {
   VideosWithChannelLoaded({required this.data});
 }
 
-//error
+final class VideosWithLiveAndChannelLoaded extends VideosWithChannelState {
+  final List<VideosWithChannel> data;
+  VideosWithLiveAndChannelLoaded({required this.data});
+}
+
 final class VideosWithChannelError extends VideosWithChannelState {
   final String errorMessage;
   VideosWithChannelError({required this.errorMessage});

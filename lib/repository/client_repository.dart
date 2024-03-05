@@ -8,8 +8,8 @@ class ClientRepository {
     return await _clientApi.fetchChannel(channelId);
   }
 
-  Future fetchVideos() async {
-    return await _clientApi.fetchVideos();
+  Future fetchVideos([bool isEventTypeLive = false]) async {
+    return await _clientApi.fetchVideos(isEventTypeLive);
   }
 
   Future fetchSubscription(String accessToken) async {

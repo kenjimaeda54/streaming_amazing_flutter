@@ -18,10 +18,13 @@ class ClientService extends BaseService {
   }
 
   @override
-  Future<Video?> fetchVideos() async {
+  Future<Video?> fetchVideos([bool isEventTypeLive = false]) async {
     try {
-      final response = await api.get(
-          "/search?part=snippet&relevanceLanguage=pt&maxResults=10&videoDuration=medium&type=video&regionCode=BR&key=AIzaSyCU7HV_2LRv3Z3Uf0Prvb2C7i_ob8j9cQU");
+      final response = isEventTypeLive
+          ? await api.get(
+              "/search?part=snippet&eventType=live&relevanceLanguage=pt&maxResults=10&type=video&regionCode=BR&key=AIzaSyCU7HV_2LRv3Z3Uf0Prvb2C7i_ob8j9cQU")
+          : await api.get(
+              "/search?part=snippet&relevanceLanguage=pt&maxResults=10&videoDuration=medium&type=video&regionCode=BR&key=AIzaSyCU7HV_2LRv3Z3Uf0Prvb2C7i_ob8j9cQU");
 
       return Video.fromJson(response.data);
     } catch (e) {

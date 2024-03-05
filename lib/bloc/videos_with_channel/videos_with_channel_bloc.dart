@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:streaming_amazing_flutter/models/channel/channel.dart';
@@ -16,11 +17,51 @@ class VideosWithChannelBloc
 
   VideosWithChannelBloc() : super(VideosWithChannelInitial()) {
     on<VideosWithChannelEvent>(_fetchVideosWithChannel); //registrando um evento
+    on<VideosWithLiveFetchDataEvent>(_fetchVideosWithLiveAndChannel);
+  }
+
+  FutureOr<void> _fetchVideosWithLiveAndChannel(
+      VideosWithLiveFetchDataEvent event,
+      Emitter<VideosWithChannelState> emit) async {
+    final List<VideosWithChannel> videosWithLiveAndChannel = [];
+    emit(VideosWithChannelStateLoading());
+
+    await _clientRepo
+        .fetchVideos(true)
+        .onError((error, stackTrace) =>
+            emit(VideosWithChannelError(errorMessage: error.toString())))
+        .then((videos) async {
+      if (videos != null) {
+        for (var inteirador in (videos as Video).items) {
+          await _clientRepo
+              .fetchChannel(inteirador.snippet.channelId)
+              .onError((error, stackTrace) =>
+                  VideosWithChannelError(errorMessage: error.toString()))
+              .then((it) {
+            final channel = it as Channel;
+            final video = VideosWithChannel(
+                channelId: channel.items.first.id,
+                descriptionVideo: inteirador.snippet.description,
+                id: inteirador.id.videoId,
+                publishedVideo: inteirador.snippet.publishedAt,
+                subscriberCountChannel:
+                    it.items.first.statistics.subscriberCount,
+                thumbVideo: inteirador.snippet.thumbnails.high.url,
+                thumbProfileChannel:
+                    channel.items.first.snippet.thumbnails.medium.url,
+                titleVideo: inteirador.snippet.title,
+                videoId: inteirador.id.videoId);
+
+            videosWithLiveAndChannel.add(video);
+          });
+        }
+        emit(VideosWithLiveAndChannelLoaded(data: videosWithLiveAndChannel));
+      }
+    });
   }
 
   FutureOr<void> _fetchVideosWithChannel(VideosWithChannelEvent event,
       Emitter<VideosWithChannelState> emit) async {
-    emit(VideosWithChannelInitial());
     final List<VideosWithChannel> videosWithChannel = [];
     emit(VideosWithChannelStateLoading());
     await _clientRepo.fetchVideos().onError((error, stackTrace) {

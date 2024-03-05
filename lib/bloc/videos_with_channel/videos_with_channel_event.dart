@@ -4,3 +4,5 @@ part of 'videos_with_channel_bloc.dart';
 sealed class VideosWithChannelEvent {}
 
 class VideosFetchDataEvent extends VideosWithChannelEvent {}
+
+class VideosWithLiveFetchDataEvent extends VideosWithChannelEvent {}

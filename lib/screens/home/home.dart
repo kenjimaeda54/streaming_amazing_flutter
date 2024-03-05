@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/google_sign_in/google_sign_in_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/subscription/subscription_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/videos_with_channel/videos_with_channel_bloc.dart';
-import 'package:streaming_amazing_flutter/mock/mock_channel_subscription.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_channel_subscription.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_videos.dart';
 
@@ -24,6 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
     _videosBloc.add(VideosFetchDataEvent());
     _subscriptionBloc = BlocProvider.of(context);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
 //quando um widget depended de outro
@@ -48,7 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(25),
                   child: Image.network(
-                    "https://github.com/kenjimaeda54.png",
+                    user.userDetails.photo ??
+                        "https://github.com/kenjimaeda.png",
                     fit: BoxFit.fill,
                     width: 50,
                     height: 50,
@@ -69,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 16),
                     ),
                     Text(
-                      "Kenji",
+                      user.userDetails.givenName ?? "",
                       style: TextStyle(
                           fontFamily: 'Lato',
                           fontWeight: FontWeight.w600,

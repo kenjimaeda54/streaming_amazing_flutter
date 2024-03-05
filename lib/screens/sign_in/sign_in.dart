@@ -54,7 +54,7 @@ class _SignInState extends State<SignIn> {
                   height: 20,
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.7,
+                  width: MediaQuery.of(context).size.width * 0.8,
                   child: Text(
                     "Seu aplicativo de streaming de vídeos.\nEste aplicativo e independente usamos sua conta do Youtube para personalizar sua experiência",
                     style: TextStyle(
