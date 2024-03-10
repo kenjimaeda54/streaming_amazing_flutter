@@ -16,13 +16,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late VideosWithChannelBloc _videosBloc;
   late SubscriptionBloc _subscriptionBloc;
 
   @override
   void initState() {
-    _videosBloc = BlocProvider.of(context);
-    _videosBloc.add(VideosFetchDataEvent());
     _subscriptionBloc = BlocProvider.of(context);
     super.initState();
   }
@@ -149,25 +146,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   listener: (BuildContext context, SubscriptionState state) {},
                 )),
             Expanded(
-              child:
-                  BlocConsumer<VideosWithChannelBloc, VideosWithChannelState>(
+              child: BlocBuilder<VideosWithChannelBloc, VideosWithChannelState>(
                 builder: (context, state) {
-                  if (state is VideosWithChannelStateLoading) {
-                    return const Text("carregando");
-                  } else if (state is VideosWithChannelLoaded) {
-                    return ListView.builder(
+                  return switch (state) {
+                    VideosStateLoading() => const Text("Loading"),
+                    VideosWithChannelLoaded() => ListView.builder(
                         itemCount: state.data.length,
                         itemBuilder: (context, index) {
                           return Padding(
                               padding:
                                   const EdgeInsets.only(bottom: 25, right: 13),
                               child: RowVideos(video: state.data[index]));
-                        });
-                  } else {
-                    return Text("error");
-                  }
+                        }),
+                    VideosWithLiveAndChannelLoaded() => const Text(''),
+                    VideosStateError() => Text("error"),
+                  };
                 },
-                listener: (context, state) {},
               ),
             )
           ],
@@ -176,3 +170,19 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 }
+
+
+//  if (state is VideosStateLoading) {
+//                     return const Text("carregando");
+//                   } else if (state is VideosWithChannelLoaded) {
+//                     return ListView.builder(
+//                         itemCount: state.data.length,
+//                         itemBuilder: (context, index) {
+//                           return Padding(
+//                               padding:
+//                                   const EdgeInsets.only(bottom: 25, right: 13),
+//                               child: RowVideos(video: state.data[index]));
+//                         });
+//                   } else {
+//                     return Text("error");
+//                   }

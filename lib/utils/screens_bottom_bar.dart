@@ -9,7 +9,7 @@ final screenBottomNavigation = [
   {
     "icon": "assets/images/home.png",
     "screen": BlocProvider<VideosWithChannelBloc>.value(
-        value: VideosWithChannelBloc(),
+        value: VideosWithChannelBloc()..add(VideosFetchDataEvent()),
         child: BlocProvider<SubscriptionBloc>.value(
           value: SubscriptionBloc(),
           child: const HomeScreen(),
@@ -18,7 +18,7 @@ final screenBottomNavigation = [
   {
     "icon": "assets/images/live.png",
     "screen": BlocProvider<VideosWithChannelBloc>.value(
-      value: VideosWithChannelBloc(),
+      value: VideosWithChannelBloc()..add(VideosWithLiveFetchDataEvent()),
       child: const LiveScreen(),
     )
   },

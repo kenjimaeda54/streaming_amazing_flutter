@@ -1,26 +1,36 @@
 part of 'videos_with_channel_bloc.dart';
 
-@immutable
-sealed class VideosWithChannelState {}
+//https://github.com/felangel/bloc/blob/master/examples/flutter_shopping_cart/lib/catalog/bloc/catalog_state.dart
 
-//state inicial
-final class VideosWithChannelInitial extends VideosWithChannelState {}
+@immutable
+sealed class VideosWithChannelState extends Equatable {
+  const VideosWithChannelState();
+
+  @override
+  List<Object> get props => [];
+}
 
 //carregando
-final class VideosWithChannelStateLoading extends VideosWithChannelState {}
+final class VideosStateLoading extends VideosWithChannelState {}
 
 //finalizado
 final class VideosWithChannelLoaded extends VideosWithChannelState {
   final List<VideosWithChannel> data;
-  VideosWithChannelLoaded({required this.data});
+  const VideosWithChannelLoaded({required this.data});
+
+  @override
+  List<Object> get props => [data];
 }
 
 final class VideosWithLiveAndChannelLoaded extends VideosWithChannelState {
   final List<VideosWithChannel> data;
-  VideosWithLiveAndChannelLoaded({required this.data});
+  const VideosWithLiveAndChannelLoaded({required this.data});
+
+  @override
+  List<Object> get props => [data];
 }
 
-final class VideosWithChannelError extends VideosWithChannelState {
+final class VideosStateError extends VideosWithChannelState {
   final String errorMessage;
-  VideosWithChannelError({required this.errorMessage});
+  const VideosStateError({required this.errorMessage});
 }
