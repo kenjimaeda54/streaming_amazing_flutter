@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,11 +18,15 @@ final List<String> scopes = [
 
 class GoogleSignInBloc
     extends Bloc<GoogleSignInEvent, GoogleAuthenticationState> {
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    clientId:
-        '359153041371-hbq6vvh9p39ojcd2t9a7p741ktip6tms.apps.googleusercontent.com',
-    scopes: scopes,
-  );
+  final GoogleSignIn _googleSignIn = Platform.isIOS
+      ? GoogleSignIn(
+          clientId:
+              '359153041371-hbq6vvh9p39ojcd2t9a7p741ktip6tms.apps.googleusercontent.com',
+          scopes: scopes,
+        )
+      : GoogleSignIn(
+          scopes: scopes,
+        );
 
   GoogleSignInBloc() : super(const GoogleAuthenticationState.unknown()) {
     on<GoogleAuthenticationChanged>(_googleAuthenticationChanged);

@@ -15,4 +15,12 @@ class ClientRepository {
   Future fetchSubscription(String accessToken) async {
     return await _clientApi.fetchSubscription(accessToken);
   }
+
+  Future fetchPlayListChannel(String playListId) async {
+    return await _clientApi.fetchPlayListChannel(playListId);
+  }
+
+  Future fetchIdsPlayListVideosByChannel(String channelId) async {
+    return await _clientApi.fetchIdsPlaysListVideosByChannel(channelId);
+  }
 }

@@ -20,7 +20,6 @@ class _LiveScreenState extends State<LiveScreen> {
     super.initState();
   }
 
-//por algum motivo precisa o dispose
   @override
   void dispose() {
     super.dispose();
@@ -46,8 +45,10 @@ class _LiveScreenState extends State<LiveScreen> {
                                 const EdgeInsets.only(bottom: 25, right: 13),
                             child: RowVideos(video: state.data[index]));
                       });
-                } else {
+                } else if (state is VideosWithChannelError) {
                   return Text("error");
+                } else {
+                  return Text("");
                 }
               },
               listener: (context, state) {},

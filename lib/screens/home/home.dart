@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/google_sign_in/google_sign_in_bloc.dart';
+import 'package:streaming_amazing_flutter/bloc/playlist_videos_channel/playlist_videos_channel_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/subscription/subscription_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/videos_with_channel/videos_with_channel_bloc.dart';
+import 'package:streaming_amazing_flutter/screens/channel_details/channel_details.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_channel_subscription.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_videos.dart';
 
@@ -102,10 +104,42 @@ class _HomeScreenState extends State<HomeScreen> {
                             return Padding(
                               padding: const EdgeInsets.only(
                                   right: 10), //padding precisa estar fora
-                              child: RowChannelSubscription(
-                                  title: state.data.items[index].snippet.title,
-                                  uri: state.data.items[index].snippet
-                                      .thumbnails.medium.url),
+                              child: InkWell(
+                                onTap: () => Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                        pageBuilder: (_, __, ___) =>
+                                            BlocProvider.value(
+                                              value:
+                                                  PlaylistVideosChannelBloc(),
+                                              child: ChannelDetails(
+                                                channel: state
+                                                    .data.items[index].snippet,
+                                              ),
+                                            ),
+                                        transitionsBuilder: (context, animation,
+                                            secondaryAnimation, child) {
+                                          const begin = Offset(0.0, 1.0);
+                                          const end = Offset.zero;
+                                          const curve = Curves.ease;
+
+                                          var tween = Tween(
+                                                  begin: begin, end: end)
+                                              .chain(CurveTween(curve: curve));
+
+                                          return SlideTransition(
+                                            position: animation.drive(tween),
+                                            child: child,
+                                          );
+                                        },
+                                        transitionDuration:
+                                            const Duration(seconds: 1))),
+                                child: RowChannelSubscription(
+                                    title:
+                                        state.data.items[index].snippet.title,
+                                    uri: state.data.items[index].snippet
+                                        .thumbnails.medium.url),
+                              ),
                             );
                           });
                     } else {
