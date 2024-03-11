@@ -1,37 +1,41 @@
 import 'dart:async';
 
+import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:streaming_amazing_flutter/models/channel/channel.dart';
 import 'package:streaming_amazing_flutter/models/videos/videos.dart';
 import 'package:streaming_amazing_flutter/models/videos_with_channel.dart';
 import 'package:streaming_amazing_flutter/repository/client_repository.dart';
 
-part 'videos_with_channel_event.dart';
-part 'videos_with_channel_state.dart';
+part 'live_videos_channel_event.dart';
+part 'live_videos_channel_state.dart';
 
-class VideosWithChannelBloc
-    extends Bloc<VideosWithChannelEvent, VideosWithChannelState> {
-  final _clientRepo = ClientRepository(); //instanciando o repositório
+class LiveVideosChannelBloc
+    extends Bloc<LiveVideosChannelEvent, LiveVideosChannelState> {
+  final _clientRepo = ClientRepository();
 
-  VideosWithChannelBloc() : super(VideosStateLoading()) {
-    on<VideosWithChannelEvent>(_fetchVideosWithChannel); //registrando um evento
+  LiveVideosChannelBloc() : super(LiveVideosChannelStateLoading()) {
+    on<FetchLiveVideosChannelEvent>(_fetchVideosWithLiveAndChannel);
   }
 
-  FutureOr<void> _fetchVideosWithChannel(VideosWithChannelEvent event,
-      Emitter<VideosWithChannelState> emit) async {
-    final List<VideosWithChannel> videosWithChannel = [];
-    emit(VideosStateLoading());
-    await _clientRepo.fetchVideos().onError((error, stackTrace) {
-      emit(VideosStateError(errorMessage: error.toString()));
-    }).then((videos) async {
+  FutureOr<void> _fetchVideosWithLiveAndChannel(
+      FetchLiveVideosChannelEvent event,
+      Emitter<LiveVideosChannelState> emit) async {
+    final List<VideosWithChannel> videosWithLiveAndChannel = [];
+    emit(LiveVideosChannelStateLoading());
+
+    await _clientRepo
+        .fetchVideos(true)
+        .onError((error, stackTrace) =>
+            emit(LiveVideosChannelStateError(errorMessage: error.toString())))
+        .then((videos) async {
       if (videos != null) {
         for (var inteirador in (videos as Video).items) {
           await _clientRepo
               .fetchChannel(inteirador.snippet.channelId)
               .onError((error, stackTrace) =>
-                  VideosStateError(errorMessage: error.toString()))
+                  LiveVideosChannelStateError(errorMessage: error.toString()))
               .then((it) {
             final channel = it as Channel;
             final video = VideosWithChannel(
@@ -47,10 +51,10 @@ class VideosWithChannelBloc
                 titleVideo: inteirador.snippet.title,
                 videoId: inteirador.id.videoId);
 
-            videosWithChannel.add(video);
+            videosWithLiveAndChannel.add(video);
           });
         }
-        emit(VideosWithChannelLoaded(data: videosWithChannel));
+        emit(LiveVideosChannelStateLoaded(data: videosWithLiveAndChannel));
       }
     });
   }

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:streaming_amazing_flutter/models/subscription/subscription.dart';
@@ -11,14 +12,14 @@ part 'subscription_state.dart';
 class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
   final _clientRepo = ClientRepository();
 
-  SubscriptionBloc() : super(SubscriptionInitial()) {
+  SubscriptionBloc() : super(SubscriptionLoading()) {
     on<SubscriptionFetchDataEvent>(_fetchSubscription);
   }
 
   FutureOr<void> _fetchSubscription(
       SubscriptionFetchDataEvent event, Emitter<SubscriptionState> emit) async {
-    emit(SubscriptionInitial());
     emit(SubscriptionLoading());
+
     await _clientRepo
         .fetchSubscription(event.accessToken)
         .onError(

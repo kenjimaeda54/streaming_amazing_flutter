@@ -9,8 +9,3 @@ class VideosFetchDataEvent extends VideosWithChannelEvent {
   @override
   List<Object> get props => [];
 }
-
-class VideosWithLiveFetchDataEvent extends VideosWithChannelEvent {
-  @override
-  List<Object> get props => [];
-}

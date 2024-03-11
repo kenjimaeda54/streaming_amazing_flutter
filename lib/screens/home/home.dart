@@ -8,35 +8,12 @@ import 'package:streaming_amazing_flutter/screens/channel_details/channel_detail
 import 'package:streaming_amazing_flutter/screens/home/widget/row_channel_subscription.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_videos.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  late SubscriptionBloc _subscriptionBloc;
-
-  @override
-  void initState() {
-    _subscriptionBloc = BlocProvider.of(context);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-//quando um widget depended de outro
-//https://stackoverflow.com/questions/64482468/how-to-access-data-in-blocs-state-from-another-bloc/72528313#72528313
-//para chamar o subscriiption passando access token
-  @override
   Widget build(BuildContext context) {
     final user = context.select((GoogleSignInBloc bloc) => bloc.state.user);
-    _subscriptionBloc
-        .add(SubscriptionFetchDataEvent(accessToken: user.accessToken));
 
     return Scaffold(
         body: SafeArea(
@@ -89,12 +66,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(
                 height: 130,
-                child: BlocConsumer<SubscriptionBloc, SubscriptionState>(
+                child: BlocBuilder<SubscriptionBloc, SubscriptionState>(
                   builder: (context, state) {
-                    if (state is SubscriptionLoading) {
-                      return const Text("Loading");
-                    } else if (state is SubscriptionLoaded) {
-                      return ListView.builder(
+                    return switch (state) {
+                      SubscriptionLoading() => const Text("loading"),
+                      SubscriptionLoaded() => ListView.builder(
                           itemCount: state.data.items.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
@@ -138,12 +114,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                         .thumbnails.medium.url),
                               ),
                             );
-                          });
-                    } else {
-                      return Text("error");
-                    }
+                          }),
+                      SubscriptionError() => const Text("error"),
+                    };
                   },
-                  listener: (BuildContext context, SubscriptionState state) {},
                 )),
             Expanded(
               child: BlocBuilder<VideosWithChannelBloc, VideosWithChannelState>(
@@ -158,7 +132,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   const EdgeInsets.only(bottom: 25, right: 13),
                               child: RowVideos(video: state.data[index]));
                         }),
-                    VideosWithLiveAndChannelLoaded() => const Text(''),
                     VideosStateError() => Text("error"),
                   };
                 },
@@ -170,6 +143,59 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 }
+
+
+  // if (state is SubscriptionLoading) {
+  //                     return const Text("Loading");
+  //                   } else if (state is SubscriptionLoaded) {
+  //                     return ListView.builder(
+  //                         itemCount: state.data.items.length,
+  //                         scrollDirection: Axis.horizontal,
+  //                         itemBuilder: (context, index) {
+  //                           return Padding(
+  //                             padding: const EdgeInsets.only(
+  //                                 right: 10), //padding precisa estar fora
+  //                             child: InkWell(
+  //                               onTap: () => Navigator.push(
+  //                                   context,
+  //                                   PageRouteBuilder(
+  //                                       pageBuilder: (_, __, ___) =>
+  //                                           BlocProvider.value(
+  //                                             value:
+  //                                                 PlaylistVideosChannelBloc(),
+  //                                             child: ChannelDetails(
+  //                                               channel: state
+  //                                                   .data.items[index].snippet,
+  //                                             ),
+  //                                           ),
+  //                                       transitionsBuilder: (context, animation,
+  //                                           secondaryAnimation, child) {
+  //                                         const begin = Offset(0.0, 1.0);
+  //                                         const end = Offset.zero;
+  //                                         const curve = Curves.ease;
+
+  //                                         var tween = Tween(
+  //                                                 begin: begin, end: end)
+  //                                             .chain(CurveTween(curve: curve));
+
+  //                                         return SlideTransition(
+  //                                           position: animation.drive(tween),
+  //                                           child: child,
+  //                                         );
+  //                                       },
+  //                                       transitionDuration:
+  //                                           const Duration(seconds: 1))),
+  //                               child: RowChannelSubscription(
+  //                                   title:
+  //                                       state.data.items[index].snippet.title,
+  //                                   uri: state.data.items[index].snippet
+  //                                       .thumbnails.medium.url),
+  //                             ),
+  //                           );
+  //                         });
+  //                   } else {
+  //                     return Text("error");
+  //                   }
 
 
 //  if (state is VideosStateLoading) {

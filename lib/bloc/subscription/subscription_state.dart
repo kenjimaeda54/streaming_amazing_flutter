@@ -1,18 +1,27 @@
 part of 'subscription_bloc.dart';
 
 @immutable
-sealed class SubscriptionState {}
+sealed class SubscriptionState extends Equatable {
+  const SubscriptionState();
 
-final class SubscriptionInitial extends SubscriptionState {}
+  @override
+  List<Object> get props => [];
+}
 
 final class SubscriptionLoading extends SubscriptionState {}
 
 final class SubscriptionLoaded extends SubscriptionState {
   final Subscription data;
-  SubscriptionLoaded({required this.data});
+  const SubscriptionLoaded({required this.data});
+
+  @override
+  List<Object> get props => [data];
 }
 
 final class SubscriptionError extends SubscriptionState {
   final String errorMessage;
-  SubscriptionError({required this.errorMessage});
+  const SubscriptionError({required this.errorMessage});
+
+  @override
+  List<Object> get props => [errorMessage];
 }

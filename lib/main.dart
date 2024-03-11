@@ -23,8 +23,6 @@ class AppView extends StatelessWidget {
 
 //bloc
 //https://github.com/felangel/bloc/blob/master/examples/flutter_login/lib/login/view/login_form.dart
-//https://github.com/maraj91/flutter_news_bloc/tree/master/lib
-//https://marajhussain.medium.com/flutter-bloc-clean-architecture-best-practice-news-apis-3adb0e2012cc#:~:text=BLoC%20is%20the%20replacement%20of%20ViewModel%20in%20MVVM%20architecture.&text=It%20makes%20it%20easy%20to,the%20state%20of%20the%20application
 class Streaming extends StatefulWidget {
   const Streaming({super.key});
 

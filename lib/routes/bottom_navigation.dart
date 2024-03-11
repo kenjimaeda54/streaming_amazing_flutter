@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:streaming_amazing_flutter/utils/screens_bottom_bar.dart';
 
 class BottomNavigation extends StatelessWidget {
   final int indexBottomSelected;
+  final List<Map<String, Object>> screenBottomNavigation;
   final Function(int index) action;
   const BottomNavigation(
-      {super.key, required this.indexBottomSelected, required this.action});
+      {super.key,
+      required this.indexBottomSelected,
+      required this.action,
+      required this.screenBottomNavigation});
 
   @override
   Widget build(BuildContext context) {
