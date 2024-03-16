@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:streaming_amazing_flutter/models/playlist_channel/playlist_channel.dart';
@@ -13,7 +14,7 @@ class PlaylistVideosChannelBloc
     extends Bloc<PlayListVideosChannelEvent, PlayListVideosChannelState> {
   final _clientRepo = ClientRepository();
 
-  PlaylistVideosChannelBloc() : super(PlayListVideosChannelInitial()) {
+  PlaylistVideosChannelBloc() : super(PlayListVideosChannelStateLoading()) {
     on<PlayListVideosFetchDataEvent>(_fetchPlayListChannel);
   }
 

@@ -83,8 +83,15 @@ class HomeScreen extends StatelessWidget {
                                     PageRouteBuilder(
                                         pageBuilder: (_, __, ___) =>
                                             BlocProvider.value(
-                                              value:
-                                                  PlaylistVideosChannelBloc(),
+                                              value: PlaylistVideosChannelBloc()
+                                                ..add(
+                                                    PlayListVideosFetchDataEvent(
+                                                        channelId: state
+                                                            .data
+                                                            .items[index]
+                                                            .snippet
+                                                            .resourceId
+                                                            .channelId)),
                                               child: ChannelDetails(
                                                 channel: state
                                                     .data.items[index].snippet,
@@ -143,72 +150,3 @@ class HomeScreen extends StatelessWidget {
     ));
   }
 }
-
-
-  // if (state is SubscriptionLoading) {
-  //                     return const Text("Loading");
-  //                   } else if (state is SubscriptionLoaded) {
-  //                     return ListView.builder(
-  //                         itemCount: state.data.items.length,
-  //                         scrollDirection: Axis.horizontal,
-  //                         itemBuilder: (context, index) {
-  //                           return Padding(
-  //                             padding: const EdgeInsets.only(
-  //                                 right: 10), //padding precisa estar fora
-  //                             child: InkWell(
-  //                               onTap: () => Navigator.push(
-  //                                   context,
-  //                                   PageRouteBuilder(
-  //                                       pageBuilder: (_, __, ___) =>
-  //                                           BlocProvider.value(
-  //                                             value:
-  //                                                 PlaylistVideosChannelBloc(),
-  //                                             child: ChannelDetails(
-  //                                               channel: state
-  //                                                   .data.items[index].snippet,
-  //                                             ),
-  //                                           ),
-  //                                       transitionsBuilder: (context, animation,
-  //                                           secondaryAnimation, child) {
-  //                                         const begin = Offset(0.0, 1.0);
-  //                                         const end = Offset.zero;
-  //                                         const curve = Curves.ease;
-
-  //                                         var tween = Tween(
-  //                                                 begin: begin, end: end)
-  //                                             .chain(CurveTween(curve: curve));
-
-  //                                         return SlideTransition(
-  //                                           position: animation.drive(tween),
-  //                                           child: child,
-  //                                         );
-  //                                       },
-  //                                       transitionDuration:
-  //                                           const Duration(seconds: 1))),
-  //                               child: RowChannelSubscription(
-  //                                   title:
-  //                                       state.data.items[index].snippet.title,
-  //                                   uri: state.data.items[index].snippet
-  //                                       .thumbnails.medium.url),
-  //                             ),
-  //                           );
-  //                         });
-  //                   } else {
-  //                     return Text("error");
-  //                   }
-
-
-//  if (state is VideosStateLoading) {
-//                     return const Text("carregando");
-//                   } else if (state is VideosWithChannelLoaded) {
-//                     return ListView.builder(
-//                         itemCount: state.data.length,
-//                         itemBuilder: (context, index) {
-//                           return Padding(
-//                               padding:
-//                                   const EdgeInsets.only(bottom: 25, right: 13),
-//                               child: RowVideos(video: state.data[index]));
-//                         });
-//                   } else {
-//                     return Text("error");
-//                   }

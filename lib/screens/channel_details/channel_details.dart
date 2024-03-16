@@ -5,24 +5,9 @@ import 'package:streaming_amazing_flutter/models/subscription/subscription.dart'
 import 'package:streaming_amazing_flutter/screens/channel_details/widget/row_item_playlist.dart';
 import 'package:streaming_amazing_flutter/widgets/back_button/back_button.dart';
 
-class ChannelDetails extends StatefulWidget {
+class ChannelDetails extends StatelessWidget {
   final SnippetSubscription channel;
   const ChannelDetails({super.key, required this.channel});
-
-  @override
-  State<ChannelDetails> createState() => _ChannelDetailsState();
-}
-
-class _ChannelDetailsState extends State<ChannelDetails> {
-  late PlaylistVideosChannelBloc _playlistVideosChannelBloc;
-
-  @override
-  void initState() {
-    super.initState();
-    _playlistVideosChannelBloc = BlocProvider.of(context);
-    _playlistVideosChannelBloc.add(PlayListVideosFetchDataEvent(
-        channelId: widget.channel.resourceId.channelId));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +25,7 @@ class _ChannelDetailsState extends State<ChannelDetails> {
             ),
             centerTitle: true,
             title: Text(
-              widget.channel.title,
+              channel.title,
               style: const TextStyle(
                   fontFamily: 'Lato',
                   fontSize: 20,
@@ -49,26 +34,23 @@ class _ChannelDetailsState extends State<ChannelDetails> {
           ),
         ),
       ),
-      body: BlocConsumer<PlaylistVideosChannelBloc, PlayListVideosChannelState>(
+      body: BlocBuilder<PlaylistVideosChannelBloc, PlayListVideosChannelState>(
         builder: (context, state) {
-          if (state is PlayListVideosChannelStateLoading) {
-            return const Text("carregando");
-          } else if (state is PlayListVideosChannelLoaded) {
-            return ListView.builder(
+          return switch (state) {
+            PlayListVideosChannelStateLoading() => Text("loading"),
+            PlayListVideosChannelLoaded() => ListView.builder(
                 itemCount: state.data.length,
                 itemBuilder: (context, index) {
                   return Padding(
                       padding: const EdgeInsets.only(
                           bottom: 25, right: 13, left: 13),
                       child: RowItemPlaylist(
-                        snippet: state.data![index].snippet,
+                        snippet: state.data[index].snippet,
                       ));
-                });
-          } else {
-            return Text("error");
-          }
+                }),
+            PlayListVideosChannelError() => Text("error"),
+          };
         },
-        listener: (context, state) {},
       ),
     );
   }
