@@ -21,7 +21,7 @@ class GoogleSignInBloc
   final GoogleSignIn _googleSignIn = Platform.isIOS
       ? GoogleSignIn(
           clientId:
-              '413885049367-5pp2l96a1n9v407ajuem937mg671madh.apps.googleusercontent.com',
+              '672340035221-oe3kl6p582vel1hq6v6k5min6q6vn2d5.apps.googleusercontent.com',
           scopes: scopes,
         )
       : GoogleSignIn(

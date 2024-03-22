@@ -14,7 +14,7 @@ class CustomBackButton extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
               child: Container(
                 decoration: BoxDecoration(
                     color: Theme.of(context)

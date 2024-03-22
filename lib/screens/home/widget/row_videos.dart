@@ -14,7 +14,7 @@ class RowVideos extends StatelessWidget {
           child: Image.network(
             video.thumbVideo,
             width: double.infinity,
-            height: 180,
+            height: 230,
             fit: BoxFit.fill,
           ),
         ),

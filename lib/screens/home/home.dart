@@ -5,6 +5,7 @@ import 'package:streaming_amazing_flutter/bloc/playlist_videos_channel/playlist_
 import 'package:streaming_amazing_flutter/bloc/subscription/subscription_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/videos_with_channel/videos_with_channel_bloc.dart';
 import 'package:streaming_amazing_flutter/screens/channel_details/channel_details.dart';
+import 'package:streaming_amazing_flutter/screens/details_video/details_video.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_channel_subscription.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_videos.dart';
 
@@ -134,10 +135,14 @@ class HomeScreen extends StatelessWidget {
                     VideosWithChannelLoaded() => ListView.builder(
                         itemCount: state.data.length,
                         itemBuilder: (context, index) {
-                          return Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: 25, right: 13),
-                              child: RowVideos(video: state.data[index]));
+                          return InkWell(
+                            onTap: () => Navigator.of(context)
+                                .push(DetailsVideo.route(state.data[index])),
+                            child: Padding(
+                                padding: const EdgeInsets.only(
+                                    bottom: 25, right: 13),
+                                child: RowVideos(video: state.data[index])),
+                          );
                         }),
                     VideosStateError() => Text("error"),
                   };
