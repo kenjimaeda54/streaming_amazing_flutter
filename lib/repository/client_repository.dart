@@ -23,4 +23,8 @@ class ClientRepository {
   Future fetchIdsPlayListVideosByChannel(String channelId) async {
     return await _clientApi.fetchIdsPlaysListVideosByChannel(channelId);
   }
+
+  Future fetchVideoDetails(String videoId) async {
+    return await _clientApi.fetchVideosDetails(videoId);
+  }
 }

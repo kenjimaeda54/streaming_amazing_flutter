@@ -2,6 +2,7 @@ import 'package:streaming_amazing_flutter/models/channel/channel.dart';
 import 'package:streaming_amazing_flutter/models/playlist_channel/playlist_channel.dart';
 import 'package:streaming_amazing_flutter/models/playlist_ids_videos_channel/playlist_ids_videos_channel.dart';
 import 'package:streaming_amazing_flutter/models/subscription/subscription.dart';
+import 'package:streaming_amazing_flutter/models/video_details/video_details.dart';
 import 'package:streaming_amazing_flutter/models/videos/videos.dart';
 
 abstract class BaseService {
@@ -11,4 +12,5 @@ abstract class BaseService {
   Future<PlayListChannel> fetchPlayListChannel(String playListId);
   Future<PlaylistIdsVideosChannel> fetchIdsPlaysListVideosByChannel(
       String channelId);
+  Future<VideoDetails> fetchVideosDetails(String videoId);
 }
