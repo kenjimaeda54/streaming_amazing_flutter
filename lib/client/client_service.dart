@@ -13,7 +13,7 @@ class ClientService extends BaseService {
   Future<Channel?> fetchChannel(String channelId) async {
     try {
       final response = await api.get(
-          "/channels?part=statistics&part=snippet&id=$channelId&key=AIzaSyATzl1uoUluuh3mf-OR36VXunuZFqUrzxQ");
+          "/channels?part=statistics&part=snippet&id=$channelId&key=AIzaSyB0YPm9BnQwImdG_gq99CD0FAbah_nnSdQ");
       return Channel.fromJson(response.data);
     } catch (e) {
       rethrow;
@@ -25,9 +25,9 @@ class ClientService extends BaseService {
     try {
       final response = isEventTypeLive
           ? await api.get(
-              "/search?part=snippet&eventType=live&relevanceLanguage=pt&maxResults=10&type=video&regionCode=BR&key=AIzaSyATzl1uoUluuh3mf-OR36VXunuZFqUrzxQ")
+              "/search?part=snippet&eventType=live&relevanceLanguage=pt&maxResults=10&type=video&regionCode=BR&key=AIzaSyB0YPm9BnQwImdG_gq99CD0FAbah_nnSdQ")
           : await api.get(
-              "/search?part=snippet&relevanceLanguage=pt&maxResults=10&videoDuration=medium&type=video&regionCode=BR&key=AIzaSyATzl1uoUluuh3mf-OR36VXunuZFqUrzxQ");
+              "/search?part=snippet&relevanceLanguage=pt&maxResults=10&videoDuration=medium&type=video&regionCode=BR&key=AIzaSyB0YPm9BnQwImdG_gq99CD0FAbah_nnSdQ");
 
       return Video.fromJson(response.data);
     } catch (e) {
@@ -39,7 +39,7 @@ class ClientService extends BaseService {
   Future<Subscription> fetchSubscription(String accessToken) async {
     try {
       final response = await api.get(
-          "/subscriptions?part=snippet&maxResults=10&mine=true&key=AIzaSyATzl1uoUluuh3mf-OR36VXunuZFqUrzxQ",
+          "/subscriptions?part=snippet&maxResults=10&mine=true&key=AIzaSyB0YPm9BnQwImdG_gq99CD0FAbah_nnSdQ",
           options: Options(headers: {"Authorization": "Bearer $accessToken"}));
 
       return Subscription.fromJson(response.data);
@@ -52,7 +52,7 @@ class ClientService extends BaseService {
   Future<PlayListChannel> fetchPlayListChannel(String playListId) async {
     try {
       final response = await api.get(
-          "/playlistItems?part=snippet&maxResults=1&playlistId=$playListId&key=AIzaSyATzl1uoUluuh3mf-OR36VXunuZFqUrzxQ");
+          "/playlistItems?part=snippet&maxResults=1&playlistId=$playListId&key=AIzaSyB0YPm9BnQwImdG_gq99CD0FAbah_nnSdQ");
 
       return PlayListChannel.fromJson(response.data);
     } catch (e) {
@@ -65,7 +65,7 @@ class ClientService extends BaseService {
       String channelId) async {
     try {
       final response = await api.get(
-          "/playlists?part=id&channelId=$channelId&maxResults=10&key=AIzaSyATzl1uoUluuh3mf-OR36VXunuZFqUrzxQ");
+          "/playlists?part=id&channelId=$channelId&maxResults=10&key=AIzaSyB0YPm9BnQwImdG_gq99CD0FAbah_nnSdQ");
 
       return PlaylistIdsVideosChannel.fromJson(response.data);
     } catch (e) {
@@ -77,7 +77,7 @@ class ClientService extends BaseService {
   Future<VideoDetails> fetchVideosDetails(String videoId) async {
     try {
       final response = await api.get(
-          "/videos?part=snippet&part=statistics&id=$videoId&key=AIzaSyATzl1uoUluuh3mf-OR36VXunuZFqUrzxQ");
+          "/videos?part=snippet&part=statistics&id=$videoId&key=AIzaSyB0YPm9BnQwImdG_gq99CD0FAbah_nnSdQ");
 
       return VideoDetails.fromJson(response.data);
     } catch (e) {

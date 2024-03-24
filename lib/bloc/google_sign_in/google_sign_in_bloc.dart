@@ -21,7 +21,7 @@ class GoogleSignInBloc
   final GoogleSignIn _googleSignIn = Platform.isIOS
       ? GoogleSignIn(
           clientId:
-              '517592322305-i35cmas4206gj0kmoim2lkdgal600dbc.apps.googleusercontent.com',
+              '667516945922-duj3sgihuuhmmv39bnvt3uuvo2iqmv4q.apps.googleusercontent.com',
           scopes: scopes,
         )
       : GoogleSignIn(
@@ -71,6 +71,7 @@ class GoogleSignInBloc
                   photo: userAccount.photoUrl));
           return emit(GoogleAuthenticationState.authenticated(user));
         } else {
+          await _googleSignIn.signOut();
           return emit(const GoogleAuthenticationState.unauthenticated());
         }
       case AuthenticationStatus.unknown:

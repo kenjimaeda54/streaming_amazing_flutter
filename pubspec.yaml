@@ -39,6 +39,7 @@ dependencies:
   jiffy: ^6.2.2
   eval_ex: ^1.1.8
   youtube_player_iframe: ^5.1.1
+  skeletonizer: ^1.1.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

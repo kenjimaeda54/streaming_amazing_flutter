@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/google_sign_in/google_sign_in_bloc.dart';
+import 'package:streaming_amazing_flutter/models/splash/splash_screen.dart';
+import 'package:streaming_amazing_flutter/screens/sign_in/sign_in.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -70,7 +72,10 @@ class ProfileScreen extends StatelessWidget {
                         padding: MaterialStateProperty.all(
                             EdgeInsets.zero), //retirar o padding interno
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            SignIn.route(), (route) => false);
+                      },
                       child: Text(
                         "Sair",
                         textAlign: TextAlign.start,

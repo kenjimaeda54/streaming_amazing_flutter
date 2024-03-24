@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/live_videos_channel/live_videos_channel_bloc.dart';
+import 'package:streaming_amazing_flutter/screens/details_video/details_video.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_videos.dart';
 
 class LiveScreen extends StatelessWidget {
@@ -20,10 +21,14 @@ class LiveScreen extends StatelessWidget {
                   LiveVideosChannelStateLoaded() => ListView.builder(
                       itemCount: state.data.length,
                       itemBuilder: (context, index) {
-                        return Padding(
-                            padding:
-                                const EdgeInsets.only(bottom: 25, right: 13),
-                            child: RowVideos(video: state.data[index]));
+                        return InkWell(
+                          onTap: () => Navigator.of(context)
+                              .push(DetailsVideo.route(state.data[index])),
+                          child: Padding(
+                              padding:
+                                  const EdgeInsets.only(bottom: 25, right: 13),
+                              child: RowVideos(video: state.data[index])),
+                        );
                       }),
                   LiveVideosChannelStateError() => throw UnimplementedError(),
                 };
