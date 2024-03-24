@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:streaming_amazing_flutter/bloc/channel/channel_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/google_sign_in/google_sign_in_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/playlist_videos_channel/playlist_videos_channel_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/subscription/subscription_bloc.dart';
@@ -82,22 +83,35 @@ class HomeScreen extends StatelessWidget {
                                 onTap: () => Navigator.push(
                                     context,
                                     PageRouteBuilder(
-                                        pageBuilder: (_, __, ___) =>
-                                            BlocProvider.value(
-                                              value: PlaylistVideosChannelBloc()
-                                                ..add(
-                                                    PlayListVideosFetchDataEvent(
-                                                        channelId: state
-                                                            .data
-                                                            .items[index]
-                                                            .snippet
-                                                            .resourceId
-                                                            .channelId)),
-                                              child: ChannelDetails(
-                                                channel: state
-                                                    .data.items[index].snippet,
-                                              ),
-                                            ),
+                                        pageBuilder:
+                                            (_, __, ___) => MultiBlocProvider(
+                                                  providers: [
+                                                    BlocProvider.value(
+                                                        value: PlaylistVideosChannelBloc()
+                                                          ..add(PlayListVideosFetchDataEvent(
+                                                              channelId: state
+                                                                  .data
+                                                                  .items[index]
+                                                                  .snippet
+                                                                  .resourceId
+                                                                  .channelId))),
+                                                    BlocProvider.value(
+                                                        value: ChannelBloc()
+                                                          ..add(FetchChannelEvent(
+                                                              channelId: state
+                                                                  .data
+                                                                  .items[index]
+                                                                  .snippet
+                                                                  .resourceId
+                                                                  .channelId))),
+                                                  ],
+                                                  child: ChannelDetails(
+                                                    snippetSubscription: state
+                                                        .data
+                                                        .items[index]
+                                                        .snippet,
+                                                  ),
+                                                ),
                                         transitionsBuilder: (context, animation,
                                             secondaryAnimation, child) {
                                           const begin = Offset(0.0, 1.0);
