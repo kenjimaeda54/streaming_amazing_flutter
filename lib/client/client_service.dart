@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:streaming_amazing_flutter/client/base_service.dart';
 import 'package:streaming_amazing_flutter/client/dio.dart';
 import 'package:streaming_amazing_flutter/models/channel/channel.dart';
@@ -9,11 +10,12 @@ import 'package:streaming_amazing_flutter/models/video_details/video_details.dar
 import 'package:streaming_amazing_flutter/models/videos/videos.dart';
 
 class ClientService extends BaseService {
+  final apiKey = dotenv.env['API_KEY'];
   @override
   Future<Channel?> fetchChannel(String channelId) async {
     try {
       final response = await api.get(
-          "/channels?part=statistics&part=snippet&id=$channelId&key=AIzaSyB0YPm9BnQwImdG_gq99CD0FAbah_nnSdQ");
+          "/channels?part=statistics&part=snippet&id=$channelId&key=$apiKey");
       return Channel.fromJson(response.data);
     } catch (e) {
       rethrow;
@@ -25,9 +27,9 @@ class ClientService extends BaseService {
     try {
       final response = isEventTypeLive
           ? await api.get(
-              "/search?part=snippet&eventType=live&relevanceLanguage=pt&maxResults=10&type=video&regionCode=BR&key=AIzaSyB0YPm9BnQwImdG_gq99CD0FAbah_nnSdQ")
+              "/search?part=snippet&eventType=live&relevanceLanguage=pt&maxResults=10&type=video&regionCode=BR&key=$apiKey")
           : await api.get(
-              "/search?part=snippet&relevanceLanguage=pt&maxResults=10&videoDuration=medium&type=video&regionCode=BR&key=AIzaSyB0YPm9BnQwImdG_gq99CD0FAbah_nnSdQ");
+              "/search?part=snippet&relevanceLanguage=pt&maxResults=10&videoDuration=medium&type=video&regionCode=BR&key=$apiKey");
 
       return Video.fromJson(response.data);
     } catch (e) {
@@ -39,7 +41,7 @@ class ClientService extends BaseService {
   Future<Subscription> fetchSubscription(String accessToken) async {
     try {
       final response = await api.get(
-          "/subscriptions?part=snippet&maxResults=10&mine=true&key=AIzaSyB0YPm9BnQwImdG_gq99CD0FAbah_nnSdQ",
+          "/subscriptions?part=snippet&maxResults=10&mine=true&key=$apiKey",
           options: Options(headers: {"Authorization": "Bearer $accessToken"}));
 
       return Subscription.fromJson(response.data);
@@ -52,7 +54,7 @@ class ClientService extends BaseService {
   Future<PlayListChannel> fetchPlayListChannel(String playListId) async {
     try {
       final response = await api.get(
-          "/playlistItems?part=snippet&maxResults=1&playlistId=$playListId&key=AIzaSyB0YPm9BnQwImdG_gq99CD0FAbah_nnSdQ");
+          "/playlistItems?part=snippet&maxResults=1&playlistId=$playListId&key=$apiKey");
 
       return PlayListChannel.fromJson(response.data);
     } catch (e) {
@@ -65,7 +67,7 @@ class ClientService extends BaseService {
       String channelId) async {
     try {
       final response = await api.get(
-          "/playlists?part=id&channelId=$channelId&maxResults=10&key=AIzaSyB0YPm9BnQwImdG_gq99CD0FAbah_nnSdQ");
+          "/playlists?part=id&channelId=$channelId&maxResults=10&key=$apiKey");
 
       return PlaylistIdsVideosChannel.fromJson(response.data);
     } catch (e) {
@@ -76,8 +78,8 @@ class ClientService extends BaseService {
   @override
   Future<VideoDetails> fetchVideosDetails(String videoId) async {
     try {
-      final response = await api.get(
-          "/videos?part=snippet&part=statistics&id=$videoId&key=AIzaSyB0YPm9BnQwImdG_gq99CD0FAbah_nnSdQ");
+      final response = await api
+          .get("/videos?part=snippet&part=statistics&id=$videoId&key=$apiKey");
 
       return VideoDetails.fromJson(response.data);
     } catch (e) {

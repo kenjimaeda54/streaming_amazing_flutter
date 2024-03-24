@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:streaming_amazing_flutter/models/user.dart';
@@ -20,8 +21,7 @@ class GoogleSignInBloc
     extends Bloc<GoogleSignInEvent, GoogleAuthenticationState> {
   final GoogleSignIn _googleSignIn = Platform.isIOS
       ? GoogleSignIn(
-          clientId:
-              '667516945922-duj3sgihuuhmmv39bnvt3uuvo2iqmv4q.apps.googleusercontent.com',
+          clientId: dotenv.env['CLIENT_ID'],
           scopes: scopes,
         )
       : GoogleSignIn(

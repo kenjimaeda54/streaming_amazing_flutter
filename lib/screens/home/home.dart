@@ -6,7 +6,7 @@ import 'package:streaming_amazing_flutter/bloc/videos_with_channel/videos_with_c
 import 'package:streaming_amazing_flutter/screens/home/widget/content_subscription.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/content_videos_with_channel.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/skeleton_subscription.dart';
-import 'package:streaming_amazing_flutter/screens/home/widget/skeleton_videos_with_channel_bloc.dart';
+import 'package:streaming_amazing_flutter/widgets/skeleton/skeleton_videos_with_channel_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

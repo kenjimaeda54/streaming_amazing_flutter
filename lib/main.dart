@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:streaming_amazing_flutter/bloc/google_sign_in/google_sign_in_bloc.dart';
 import 'package:streaming_amazing_flutter/models/splash/splash_screen.dart';
 import 'package:streaming_amazing_flutter/routes/app_routes.dart';
 import 'package:streaming_amazing_flutter/screens/sign_in/sign_in.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+  await dotenv.load(fileName: ".env");
   runApp(const AppView());
 }
 

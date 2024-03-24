@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/channel/channel_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/playlist_videos_channel/playlist_videos_channel_bloc.dart';
-import 'package:streaming_amazing_flutter/models/channel/channel.dart';
 import 'package:streaming_amazing_flutter/models/subscription/subscription.dart';
 import 'package:streaming_amazing_flutter/models/videos_with_channel.dart';
 import 'package:streaming_amazing_flutter/screens/channel_details/widget/row_item_playlist.dart';
+import 'package:streaming_amazing_flutter/screens/channel_details/widget/skeleton_channel_details.body.dart';
+import 'package:streaming_amazing_flutter/screens/channel_details/widget/skeleton_channel_details.dart';
 import 'package:streaming_amazing_flutter/screens/details_video/details_video.dart';
+import 'package:streaming_amazing_flutter/screens/details_video/widget/skeleton_details_video.dart';
 import 'package:streaming_amazing_flutter/widgets/back_button/back_button.dart';
 
 class ChannelDetails extends StatelessWidget {
@@ -18,9 +20,7 @@ class ChannelDetails extends StatelessWidget {
     return BlocBuilder<ChannelBloc, ChannelState>(
         builder: (context, channelState) {
       return switch (channelState) {
-        ChannelStateLoading() => const Scaffold(
-            body: Text("loading"),
-          ),
+        ChannelStateLoading() => const SkeletonDetailsVideo(),
         ChannelStateLoaded() => Scaffold(
             appBar: PreferredSize(
               preferredSize:
@@ -63,7 +63,8 @@ class ChannelDetails extends StatelessWidget {
                 PlayListVideosChannelState>(
               builder: (context, playlistState) {
                 return switch (playlistState) {
-                  PlayListVideosChannelStateLoading() => Text("loading"),
+                  PlayListVideosChannelStateLoading() =>
+                    const SkeletonChannelDetailsBody(),
                   PlayListVideosChannelLoaded() => ListView.builder(
                       itemCount: playlistState.data.length,
                       itemBuilder: (context, index) {

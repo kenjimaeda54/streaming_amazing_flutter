@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/live_videos_channel/live_videos_channel_bloc.dart';
 import 'package:streaming_amazing_flutter/screens/details_video/details_video.dart';
 import 'package:streaming_amazing_flutter/screens/home/widget/row_videos.dart';
+import 'package:streaming_amazing_flutter/widgets/skeleton/skeleton_videos_with_channel_bloc.dart';
 
 class LiveScreen extends StatelessWidget {
   const LiveScreen({super.key});
@@ -17,7 +18,8 @@ class LiveScreen extends StatelessWidget {
             child: BlocBuilder<LiveVideosChannelBloc, LiveVideosChannelState>(
               builder: (context, state) {
                 return switch (state) {
-                  LiveVideosChannelStateLoading() => const Text("loading"),
+                  LiveVideosChannelStateLoading() =>
+                    const SkeletonVideosWithChannel(),
                   LiveVideosChannelStateLoaded() => ListView.builder(
                       itemCount: state.data.length,
                       itemBuilder: (context, index) {
