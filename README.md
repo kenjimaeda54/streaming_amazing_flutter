@@ -65,7 +65,7 @@ YoutubePlayerScaffold(
 - Para refletir qualquer mudanca corretamente usei pacote [Equatable](https://pub.dev/packages/equatable)
 
 
-```flutter
+``` dart
 
 class Streaming extends StatefulWidget {
   const Streaming({super.key});
@@ -129,7 +129,7 @@ class _StreamingState extends State<Streaming> {
 }
 
 
-# Sigin
+// Sigin
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:streaming_amazing_flutter/bloc/google_sign_in/google_sign_in_bloc.dart';
@@ -238,7 +238,7 @@ class _SignInState extends State<SignIn> {
 }
 
 
-# Google Sigin Bloc
+// Google Sigin Bloc
 import 'dart:io';
 
 import 'package:equatable/equatable.dart';
@@ -321,7 +321,7 @@ class GoogleSignInBloc
   }
 }
 
-# Google Sigin State
+// Google Sigin State
 
 enum AuthenticationStatus { unknown, unauthenticated, authenticated }
 
@@ -360,12 +360,12 @@ class GoogleCurrentUser extends GoogleSignInEvent {}
 
 
 ```
-# 
+##
 - Evite querer reaproveitar blocs pois pode ocorrer efeitos colaterais exemplo foi LiveVideosBloc é o VideosWithChannelBloc tem metodos implementados basciamentes iguais apenas altera que um passa paremtro isLive paara repsoitoyr e retorna apenas videos que estao ocorrendo em momento de live, porem mesmo com as semelhanças precisei trabalhar separado para evitar comportamneto estranho ao emitr um bloc de isLive ou não
 - Repara exemplo abaixo que acionar um bloc que tem efeitos colaterais como requisições de internet e diferente da implementacao acima
 
 
-```flutter
+``` dart
 //bloc
 
 import 'dart:async';
@@ -478,12 +478,13 @@ final class LiveVideosChannelStateError extends LiveVideosChannelState {
 
 
 ````
-#
+##
+
 - Para criar aqueles efeitos de blu pode usar backdropfilter
 - Para o body extender o app bar pode usar extendBodyBehindAppBar e forceMaterialTransparency
 
 
-```flutter
+``` dart
 
 class CustomBackButton extends StatelessWidget {
   final Function() actionTapButton;
