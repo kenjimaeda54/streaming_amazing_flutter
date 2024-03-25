@@ -2,7 +2,7 @@
 Aplicativo de streaming de vídeos, consumindo API do Youtube. Pode visualizar na home os principais vídeos em alta e os canais em que a pessoa está inscrita. Possui tela para os vídeos ao vivo por fim visualizar o perfil do usuário.
 
 ## Feature
-- Para determinar a posição do aplicaitvo em flutter é possivel realizar de forma nativa usando propreidades do IOS é do Android, porem se fizer isto não conseguira depois programaticamente alterar a posicão da tela, por este motivo usei o SystemChrome
+- Para determinar a posição do aplicativo em flutter é possível realizar de forma nativa usando propriedades do IOS é do Android, porem se fizer isto não conseguira depois programaticamente alterar a posição da tela, por este motivo usei o SystemChrome
 
 ``` dart
 
@@ -55,14 +55,14 @@ YoutubePlayerScaffold(
 ```
 
 ##
-- Para lidar com variaveis de ambiente usei o [dotenv](https://pub.dev/packages/flutter_dotenv)
-- Arquitetura do projeto foi baseado na arquitetura bloc,pode consultar outros examples como implementar essa arquiteura [nesse link](https://github.com/felangel/bloc/tree/master/examples)
-- Para realizar o login usando esta arquiteura primerio declarei no materialApp o key do navigator, preciso inserir ele para navigator poder ser iniciado
-- Na propriedade onGenereteRoute chamei apenas um arquivo vazio é no metodo builder(reponsavel por inserir o widgets na arvore), farei a logica de logado ou não
-- Metodo listener e acionado assim que alterar o bloc fazendo assim redirecionamento para as rotas logadas se der tudo certo
-- Uusrio ao tenta logar no metodo onPress  apenas altero o bloc para  autenticaticado e automaticamente ele dispara o listener alterando para tela de home
-- Metodo GoogleAuthetnicationChanged e reponsavel determinar se esta tudo certo ou nao
-- Para refletir qualquer mudanca corretamente usei pacote [Equatable](https://pub.dev/packages/equatable)
+- Para lidar com variáveis de ambiente usei o [dotenv](https://pub.dev/packages/flutter_dotenv)
+- Arquitetura do projeto foi baseado na arquitetura bloc, pode consultar outros examplos como implementar essa arquitetura [nesse link](https://github.com/felangel/bloc/tree/master/examples)
+- Para realizar o login  primeiro declarei no materialApp o key do navigator, preciso inserir ele para navigator poder ser iniciado
+- Na propriedade onGenereteRoute chamei apenas um arquivo vazio é no metodo builder(responsável por inserir o widgets na árvore), farei a lógica de logado ou não
+- Metodo listener é acionado assim que alterar o bloc fazendo assim redirecionamento para as rotas logadas se der tudo certo
+- Usuário ao, tenta logar no método onPress  apenas altero o bloc para  autenticaticado é automaticamente ele dispara o listener alterando para tela de home
+- Metodo GoogleAuthetnicationChanged e responsável determinar se esta tudo certo ou não
+- Para refletir qualquer mudança corretamente usei pacote [Equatable](https://pub.dev/packages/equatable)
 
 
 ``` dart
@@ -361,10 +361,8 @@ class GoogleCurrentUser extends GoogleSignInEvent {}
 
 ```
 ##
-- Evite querer reaproveitar blocs pois pode ocorrer efeitos colaterais exemplo foi LiveVideosBloc é o VideosWithChannelBloc tem metodos implementados basciamentes iguais apenas altera que um passa paremtro isLive paara repsoitoyr e retorna apenas videos que estao ocorrendo em momento de live, porem mesmo com as semelhanças precisei trabalhar separado para evitar comportamneto estranho ao emitr um bloc de isLive ou não
-- Repara exemplo abaixo que acionar um bloc que tem efeitos colaterais como requisições de internet e diferente da implementacao acima
-
-
+- Evite querer reaproveitar blocs, pois podem ocorrer efeitos colaterais, exemplo foi LiveVideosBloc é o VideosWithChannelBloc tem métodos implementados basicamente iguais apenas altera que uma passa – parâmetro  isLive para repositório é retorna apenas vídeos que estão ocorrendo em momento de live, porem mesmo com as semelhanças precisei trabalhar separado para evitar comportamento estranho ao emitir bloc
+  
 ``` dart
 //bloc
 
@@ -480,8 +478,8 @@ final class LiveVideosChannelStateError extends LiveVideosChannelState {
 ````
 ##
 
-- Para criar aqueles efeitos de blu pode usar backdropfilter
-- Para o body extender o app bar pode usar extendBodyBehindAppBar e forceMaterialTransparency
+- Para criar aqueles efeitos de blur pode usar backdropfilter
+- Para o body estender o app bar pode usar extendBodyBehindAppBar e forceMaterialTransparency
 
 
 ``` dart
