@@ -4,7 +4,7 @@ Aplicativo de streaming de vídeos, consumindo API do Youtube. Pode visualizar n
 ## Feature
 - Para determinar a posição do aplicaitvo em flutter é possivel realizar de forma nativa usando propreidades do IOS é do Android, porem se fizer isto não conseguira depois programaticamente alterar a posicão da tela, por este motivo usei o SystemChrome
 
-```flutter
+``` flutter
 
 void main() {
  WidgetsFlutterBinding.ensureInitialized();
